@@ -145,7 +145,7 @@ let f_generate_readme = async function(
             s_path_file__readme, 
             s_content_readme
         );
-        console.log(`${s_path_file__readme}: has been written`)
+        // console.log(`${s_path_file__readme}: has been written`)
     }
 }
 
