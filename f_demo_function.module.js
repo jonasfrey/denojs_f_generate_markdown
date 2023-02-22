@@ -1,4 +1,4 @@
-import {f_generate_readme} from "./f_generate_readme.module.js";
+import {f_generate_markdown} from "./f_generate_markdown.module.js";
 
 let f_demo_function = function(){
     console.log("f_demo_function called, this functions does nothing than just print this text lol")
@@ -30,5 +30,5 @@ if(
         //./mds/test.md:end
         //./mds/test2.md:end
 
-        await f_generate_readme(import.meta.url.split("//").pop());
+        await f_generate_markdown(import.meta.url.split("//").pop());
 }

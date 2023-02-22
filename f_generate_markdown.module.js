@@ -24,10 +24,9 @@ class O_md_file{
     }
 }
 
-let f_generate_readme = async function(
+let f_generate_markdown = async function(
     s_path_file__to_convert
 ){
-
 
     var a_o_md_file = [];
     var a_o_md_file_active = [];
@@ -147,5 +146,5 @@ let f_generate_readme = async function(
 }
 
 export {
-    f_generate_readme
+    f_generate_markdown
 }

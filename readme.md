@@ -26,9 +26,9 @@ var s_test_between_start_and_end_tag = null
 ```
 ## exmaple of generating the markdown file(s)
 ```javascript
-import {f_generate_readme} from "https://deno.land/x/f_generate_markdown@[version]/mod.ts";
+import {f_generate_markdown} from "https://deno.land/x/f_generate_markdown@[version]/mod.ts";
 var s_path_file_to_convert = './my_file.js'
-await f_generate_readme(s_path_file_to_convert);
+await f_generate_markdown(s_path_file_to_convert);
 
 ```
 ## test.md will look like 
