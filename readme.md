@@ -32,7 +32,7 @@ await f_generate_markdown(s_path_file_to_convert);
 
 ```
 ## test.md will look like 
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_readme.module.js","s_ts_created":"Wed Feb 22 2023 17:20:19 GMT+0100 (Central European Standard Time)","n_ts_created":1677082819393} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Feb 22 2023 17:20:19 GMT+0100 (Central European Standard Time)","n_ts_created":1677082819393} -->
 # test heading
 when prefixing with `md:` the prefix will be replaced with ''
 <br> so we can write markdown
@@ -45,7 +45,7 @@ when prefixing with `md:` the prefix will be replaced with ''
 ```
 
 ## test2.md will look like 
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_readme.module.js","s_ts_created":"Wed Feb 22 2023 17:20:19 GMT+0100 (Central European Standard Time)","n_ts_created":1677082819394} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Wed Feb 22 2023 17:20:19 GMT+0100 (Central European Standard Time)","n_ts_created":1677082819394} -->
 ```javascript
 
         // this javascript part will be ignored in test.md but will be present in test2.md
