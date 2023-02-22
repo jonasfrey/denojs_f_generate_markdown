@@ -8,27 +8,27 @@ if(
     &&
     import.meta.main
     ){
-
+        // this comment will not be part of any markdown file
+        
         //./mds/test.md:start
+        //md: # test heading
+        //md: when prefixing with `md:` the prefix will be replaced with ''
+        //md: <br> so we can write markdown 
+        // if no 'md:' prefix is present , the content will automatically get wrapped between 
+        // markdonw javascript codeblock tags
+        f_demo_function(); 
+        //./mds/test.md:end
+
         //./mds/test2.md:start
-        //md: # test heading 
-        // everything between 'start' and 'end' will be written into the file ./mds/test.md
-        // if we want to remove the comment prefix 
-        // we have to remove the space after the // 
-        //# this is a heading
-        f_demo_function();
-        //./mds/test.md:end
 
-        // this javascript part will be ignored
-        var s_test = 2;
+        // this javascript part will be ignored in test.md but will be present in test2.md
         // because it is not between a :start and :end tag
-
+        var s_test = 2;
         //./mds/test.md:start
-        var s_test_between_start_and_end_tag = null
+        // this will be present in test.md and test2.md
+        var s_test_between_start_and_end_tag = null 
         //./mds/test.md:end
-
-        //md:that is all
-        await f_generate_readme(import.meta.url.split("//").pop());
         //./mds/test2.md:end
 
+        await f_generate_readme(import.meta.url.split("//").pop());
 }

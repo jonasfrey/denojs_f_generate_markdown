@@ -20,6 +20,7 @@ class O_md_file{
     ){
         this.s_path_file = s_path_file
         this.a_s_line = []
+        this.b_js_md_open = false
     }
 }
 
@@ -34,7 +35,6 @@ let f_generate_readme = async function(
     var s_content = await Deno.readTextFile(s_path_file__to_convert);
     var a_s_line = s_content.split("\n")
 
-    var b_js_md_open = false;
     for(let n_idx_a_s_line in a_s_line){
         var s_line = a_s_line[n_idx_a_s_line];
         var b_last_line = n_idx_a_s_line == a_s_line.length-1;
@@ -86,19 +86,19 @@ let f_generate_readme = async function(
         // console.log(a_o_md_file_active)
         if(!b_md_tag){
 
-            if(a_o_md_file_active.length > 0){
+            for(var o_md_file_active of a_o_md_file_active){
 
                 var a_s_line_to_push = []
                 var b_md_line = s_line.trim().indexOf("//md:") == 0;
 
-                if(!b_md_line && !b_js_md_open){
+                if(!b_md_line && !o_md_file_active.b_js_md_open){
                     a_s_line_to_push.push('```javascript');
-                    b_js_md_open = true;
+                    o_md_file_active.b_js_md_open = true;
                 }
-                if(b_md_line && b_js_md_open){
+                if(b_md_line && o_md_file_active.b_js_md_open){
                     
                     a_s_line_to_push.push('```');
-                    b_js_md_open = false
+                    o_md_file_active.b_js_md_open = false
                 }
 
                 // var n_idx = s_line.indexOf("//md:");
@@ -110,10 +110,6 @@ let f_generate_readme = async function(
                     a_s_line_to_push.push(s_line)
                 }
 
-            }
-
-            for(var o_md_file_active of a_o_md_file_active){
-
                 o_md_file_active.a_s_line.push(...a_s_line_to_push);
 
             }
@@ -123,11 +119,12 @@ let f_generate_readme = async function(
     }
 
     for(var o_md_file of a_o_md_file){
-        if(b_js_md_open){
+        if(o_md_file.b_js_md_open){
             o_md_file.a_s_line.push('```');
+            o_md_file.b_js_md_open = false;
         }
     }
-    b_js_md_open = false;
+    
 
     for(var o_md_file of a_o_md_file){
 
