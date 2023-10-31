@@ -24,14 +24,12 @@ class O_md_file{
     }
 }
 
-let f_generate_markdown = async function(
-    s_path_file__to_convert
-){
+let f_a_o_md_file__from_s = function(s){
 
     var a_o_md_file = [];
     var a_o_md_file_active = [];
 
-    var s_content = await Deno.readTextFile(s_path_file__to_convert);
+    var s_content = s; 
     var a_s_line = s_content.split("\n")
 
     for(let n_idx_a_s_line in a_s_line){
@@ -72,6 +70,9 @@ let f_generate_markdown = async function(
                 
                 if(n_idx != -1){
                     a_o_md_file_active.splice(n_idx,1)
+                }
+                if(n_idx == -1){
+                    throw Error(`':end' tag was not opened before, line number: ${parseInt(n_idx_a_s_line)+1} ('${s_line}')`)
                 }
 
             }
@@ -123,8 +124,14 @@ let f_generate_markdown = async function(
             o_md_file.b_js_md_open = false;
         }
     }
+
+    return a_o_md_file
     
 
+}
+let f_generate_markdown__from_a_o_md_file = async function(
+    a_o_md_file
+){
     for(var o_md_file of a_o_md_file){
 
         // var s_comment_template_markdown_substitute__s_comment = `[comment]: <> (s_comment)`
@@ -144,6 +151,17 @@ let f_generate_markdown = async function(
         // console.log(`${s_path_file__readme}: has been written`)
     }
 }
+let f_generate_markdown__from_s = async function(s){
+    let a_o_md_file = f_a_o_md_file__from_s(s);
+    return await f_generate_markdown__from_a_o_md_file(a_o_md_file);
+}
+let f_generate_markdown = async function(
+    s_path_file__to_convert
+){
+    let a_o_md_file = f_a_o_md_file__from_s(await Deno.readTextFile(s_path_file__to_convert));
+    return await f_generate_markdown__from_a_o_md_file(a_o_md_file);
+}
+
 
 export {
     f_generate_markdown

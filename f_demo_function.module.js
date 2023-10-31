@@ -30,5 +30,13 @@ if(
         //./mds/test.md:end
         //./mds/test2.md:end
 
+
+        // if a non existing file would be closed, it will throw an error
+        //./mds/testasdf.md:end
+        // also if a file is closed 2 times 
+        //./mds/test.md:start
+        //./mds/test.md:end
+        //./mds/test.md:end < -- will throw an error
+
         await f_generate_markdown(import.meta.url.split("//").pop());
 }
