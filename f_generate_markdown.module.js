@@ -164,5 +164,6 @@ let f_generate_markdown = async function(
 
 
 export {
-    f_generate_markdown
+    f_generate_markdown,
+    f_generate_markdown__from_s
 }
