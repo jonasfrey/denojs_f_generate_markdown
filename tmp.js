@@ -1,18 +1,18 @@
-//readme.md:start
+//readme_custom.md:start
 
 
-//readme.md:end
+//readme_custom.md:end
 
-//readme.md:start
+//readme_custom.md:start
 
 
 //md: ![handy helpers logo](./logo_banner.png)
 //md: # Handy Helpers
 //md: this is a collection of useful functions
-//readme.md:end
+//readme_custom.md:end
 
-//readme.md:start
+//readme_custom.md:start
 
 let n = 2;
 
-//readme.md:end
+//readme_custom.md:end
