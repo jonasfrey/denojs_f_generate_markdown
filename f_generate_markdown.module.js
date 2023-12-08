@@ -36,10 +36,13 @@ let f_a_o_md_file__from_s = function(s){
         var s_line = a_s_line[n_idx_a_s_line];
         var b_last_line = n_idx_a_s_line == a_s_line.length-1;
         
+        var n_idx__md_tag = s_line.indexOf(".md:");
+        var n_idx__md_tag_start = s_line.indexOf(".md:start")
+        var n_idx__md_tag_end = s_line.indexOf(".md:end")
 
-        var b_md_tag = s_line.includes(".md:");
-        var b_md_tag_start = s_line.includes(".md:start")
-        var b_md_tag_end = s_line.includes(".md:end")
+        var b_md_tag = n_idx__md_tag != -1
+        var b_md_tag_start = n_idx__md_tag_start != -1
+        var b_md_tag_end = n_idx__md_tag_end != -1
         if(
             b_md_tag
         ){
@@ -47,10 +50,25 @@ let f_a_o_md_file__from_s = function(s){
             var s_line_no_tag = s_line.replace(".md:start", '.md');
             s_line_no_tag = s_line_no_tag.replace(".md:end", '.md');
 
-            var o_path_md = o_path.parse(s_line_no_tag.trim().substring(2));
+            let n_idx_comment_start = n_idx__md_tag;
+            let s_path_file = null;
+            while(n_idx_comment_start > 0){
+                n_idx_comment_start -= 1;
+                if(
+                    s_line[n_idx_comment_start] == '/'
+                    &&
+                    s_line[n_idx_comment_start+1] == '/'
+                ){
+                    s_path_file = s_line.substring(n_idx_comment_start+2,n_idx__md_tag+3)
+                    // console.log(s_path_file)
+                    break;
+                }
+            }
 
+            
+            var o_path_md = o_path.parse(s_path_file);
             // console.log(o_path_md)
-            var s_path_file = o_path.format(o_path_md);
+            s_path_file = o_path.format(o_path_md);
             // console.log(s_path_file)
 
             var o_md_file = a_o_md_file.filter(o=>o.s_path_file == s_path_file)[0]
@@ -81,7 +99,6 @@ let f_a_o_md_file__from_s = function(s){
                 a_o_md_file_active.push(o_md_file)
             }
 
-
         }
         // console.log(a_o_md_file_active)
         if(!b_md_tag){
@@ -90,6 +107,11 @@ let f_a_o_md_file__from_s = function(s){
 
                 var a_s_line_to_push = []
                 var b_md_line = s_line.trim().indexOf("//md:") == 0;
+
+                if(!b_md_line && s_line.trim() == '' && o_md_file_active.b_js_md_open == false){
+                    // ignore empty javascript lines if javascript was not present yet, 
+                    continue
+                }
 
                 if(!b_md_line && !o_md_file_active.b_js_md_open){
                     a_s_line_to_push.push('```javascript');
@@ -118,12 +140,14 @@ let f_a_o_md_file__from_s = function(s){
 
     }
 
+
     for(var o_md_file of a_o_md_file){
         if(o_md_file.b_js_md_open){
             o_md_file.a_s_line.push('```');
             o_md_file.b_js_md_open = false;
         }
     }
+
 
     return a_o_md_file
     
